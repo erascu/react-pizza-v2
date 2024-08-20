@@ -62,6 +62,8 @@ function Home() {
             sortId,
         });
 
+        // const params = qs.parse(window.location.search.substring(1));
+
         navigate(`?${queryString}`);
     }, [categoryId, sortId]); //using "navigate hook and qs" we can show the link in the adress line
 
