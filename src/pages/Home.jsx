@@ -10,17 +10,19 @@ import Search from '../components/Search/Search';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryId, setFilters } from '../redux/slices/filterSlice';
+import { setPizzas } from '../redux/slices/pizzasSlice';
 import { useNavigate } from 'react-router-dom';
-import { current } from '@reduxjs/toolkit';
+// import { current } from '@reduxjs/toolkit';
 
 function Home() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const pizzas = useSelector(state => state.pizzas.items);
     const categoryId = useSelector(state => state.filter.categoryId);
     const sortId = useSelector(state => state.filter.sortId);
 
-    const [pizzas, setPizzas] = React.useState([]);
+    // const [pizzas, setPizzas] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
     const [searchValue, setSearchValue] = React.useState('');
 
@@ -31,7 +33,8 @@ function Home() {
             try {
                 const { data } = await axios.get(`https://ffd7ac7335d0bda6.mokky.dev/pizzas?sortBy=${sortId}${categoryId > 0 ? `&category=${categoryId}` : ''}${searchValue ? `&title=*${searchValue}*` : ''}`);
 
-                setPizzas(data);
+                // setPizzas(data);
+                dispatch(setPizzas(data));
                 setLoading(false);
             } catch (error) {
                 console.log('ERROR: ', error);
