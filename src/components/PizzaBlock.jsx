@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../redux/slices/cartSlice';
+import { Link } from 'react-router-dom';
 
 const doughType = ['thin', 'traditional'];
 
@@ -12,6 +13,24 @@ function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
 
     const [sizeActive, setSizeActive] = React.useState(0);
     const [doughActive, setDoughActive] = React.useState(0);
+
+    // const doughPrice = () => {
+    //     if (doughActive < 1) {
+    //         return price;
+    //     } else if (doughActive === 1) {
+    //         return price += 15;
+    //     }
+    // }
+
+    // const sizePrice = () => {
+    //     if (sizeActive < 1) {
+    //         return 0;
+    //     } else if (sizeActive === 1) {
+    //         return 20;
+    //     } else if (sizeActive === 2) {
+    //         return 40;
+    //     }
+    // }
 
     const onClickAdd = () => {
         const item = {
@@ -34,7 +53,7 @@ function PizzaBlock({ id, title, price, imageUrl, sizes, types }) {
                     src={imageUrl}
                     alt="Pizza"
                 />
-                <h4 className="pizza-block__title">{title}</h4>
+                <h4 className="pizza-block__title">{title} <Link to={`/pizza/${id}`}><i>i</i></Link></h4>
                 <div className="pizza-block__selector">
                     <ul>
                         {types.map((doughId) => <li onClick={() => setDoughActive(doughId)} key={doughId} className={doughActive === doughId || types.length < 2 ? "active" : ""}>{doughType[doughId]}</li>)}

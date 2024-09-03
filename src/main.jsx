@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import App from './App';
 import Home from './pages/Home';
 import Cart from './components/Cart';
+import PizzaInfo from './components/PizzaInfo';
 import NotFound from './pages/NotFound';
 
 const router = createBrowserRouter(
@@ -14,6 +15,7 @@ const router = createBrowserRouter(
     <Route path='' element={<App />}>
       <Route path='/' element={<Home />} />
       <Route path='/cart' element={<Cart />} />
+      <Route path='/pizza/:id' element={<PizzaInfo />} />
       <Route path='*' element={<NotFound />} />
     </Route>
   )

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 function Header() {
@@ -8,13 +8,15 @@ function Header() {
         return obj.count + sum;
     }, 0);
 
+    const location = useLocation();
+
     return (
         <div className="header">
             <div className="container">
                 <div className="header__block">
                     <Link to="/">
                         <div className="header__logo">
-                            <img width="38" src="img/pizza-logo.svg" alt="Pizza logo" />
+                            <img width="38" src="/img/pizza-logo.svg" alt="Pizza logo" />
                             <div>
                                 <h1>React Pizza</h1>
                                 <p>Fast and Fine, Every Time!</p>
@@ -24,7 +26,7 @@ function Header() {
                 </div>
                 <Link to="/cart">
                     <div className="header__cart">
-                        <div className="button button--cart">
+                        {location.pathname !== '/cart' && <div className="button button--cart">
                             <span>{totalPrice} lei</span>
                             <div className="button__delimiter"></div>
                             <svg
@@ -57,7 +59,7 @@ function Header() {
                                 />
                             </svg>
                             <span>{totalQty}</span>
-                        </div>
+                        </div>}
                     </div>
                 </Link>
             </div>
