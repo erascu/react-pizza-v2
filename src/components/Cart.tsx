@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom';
 import CartItem from './CartItem';
 import CartEmpty from './CartEmpty';
 
-function Cart() {
+const Cart: React.FC = () => {
     const dispatch = useDispatch();
-    const items = useSelector(state => state.cart.items);
-    const totalPrice = useSelector(state => state.cart.totalPrice);
-    const totalQty = items.reduce((sum, obj) => {
+    const items = useSelector((state: any) => state.cart.items);
+    const totalPrice = useSelector((state: any) => state.cart.totalPrice);
+    const totalQty = items.reduce((sum: number, obj: any) => {
         return obj.count + sum;
     }, 0);
 
@@ -38,7 +38,7 @@ function Cart() {
                         </div>
                     </div>
                     <div className="cart__items">
-                        {items.map(item =>
+                        {items.map((item: any) =>
                             <CartItem key={item.id} {...item} />
                         )}
                     </div>

@@ -5,9 +5,9 @@ import { setSortId } from '../redux/slices/filterSlice';
 export const sortNames = ['-rating', 'price', '-price', 'title'];
 const sortItems = ['popularity', 'price low to high', 'price high to low', 'alphabet'];
 
-function Sort() {
+const Sort: React.FC = () => {
     const dispatch = useDispatch();
-    const sortRef = React.useRef();
+    const sortRef = React.useRef<HTMLDivElement>(null);
 
     // const sortItems = ['popularity', 'price low to high', 'price high to low', 'alphabet'];
     // const sortNames = ['-rating', 'price', '-price', 'title'];
@@ -15,14 +15,14 @@ function Sort() {
     const [open, setOpen] = React.useState(false);
     const [sortActive, setSortActive] = React.useState(0);
 
-    function sortChoosen(chosenItem) {
+    function sortChoosen(chosenItem: any) {
         setSortActive(chosenItem);
         dispatch(setSortId(sortNames[chosenItem]));
         setOpen(false);
     }
 
     React.useEffect(() => {
-        const handleClickOutside = e => {
+        const handleClickOutside = (e: any) => {
             if (!e.composedPath().includes(sortRef.current)) {
                 setOpen(false);
             }

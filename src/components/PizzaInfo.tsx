@@ -2,8 +2,14 @@ import React from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 
-function PizzaInfo() {
-    const [pizza, setPizza] = React.useState();
+const PizzaInfo: React.FC = () => {
+    const [pizza, setPizza] = React.useState<{
+        imageUrl: string;
+        title: string;
+        info: string;
+    }>();
+    //to add type to React Hook in TS we need to open "<>"" after useState and enter needed params, in our case it's an object
+
     const { id } = useParams();
 
     React.useEffect(() => {
@@ -12,7 +18,7 @@ function PizzaInfo() {
                 const { data } = await axios.get('https://ffd7ac7335d0bda6.mokky.dev/pizzas/' + id);
                 setPizza(data);
             } catch (error) {
-                console.log('Something went wrong: ' + error);
+                console.log('Something went wrong - ' + error);
             }
         }
 
@@ -20,7 +26,9 @@ function PizzaInfo() {
     }, []);
 
     if (!pizza) {
-        return <div className="container">Loading...</div>
+        return <div className="container loading-img">
+            <img src="/img/loading.gif" alt="Loading" />
+        </div>
     }
 
     return (

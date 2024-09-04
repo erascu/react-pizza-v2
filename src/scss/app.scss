@@ -110,6 +110,16 @@ body {
   }
 }
 
+.loading-img {
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+
+  img {
+    max-width: 70px;
+  }
+}
+
 .container {
   width: $container-width;
   margin: 0 auto;

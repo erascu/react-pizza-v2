@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-function NotFound() {
+const NotFound: React.FC = () => {
     return (
         <>
             <div className="notfound">

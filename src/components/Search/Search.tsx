@@ -2,13 +2,17 @@ import React from 'react';
 import debounce from 'lodash.debounce';
 import styles from './Search.module.scss';
 
-function Search({ setSearchValue }) {
+type SearchProps = {
+    setSearchValue: any;
+}
+
+const Search: React.FC<SearchProps> = ({ setSearchValue }) => {
     const [value, setValue] = React.useState('');
-    const inputRef = React.useRef();
+    const inputRef = React.useRef<HTMLInputElement>(null);
 
     const updatedSearchValue = React.useCallback(debounce(e => setSearchValue(e), 350), []);
 
-    function onChangeSearch(e) {
+    function onChangeSearch(e: any) {
         setValue(e.target.value);
         updatedSearchValue(e.target.value);
     }
@@ -16,7 +20,7 @@ function Search({ setSearchValue }) {
     function searchClear() {
         setValue('');
         setSearchValue('');
-        inputRef.current.focus(); //on input clear the cursor remain in the input field
+        inputRef.current?.focus(); //on input clear the cursor remain in the input field
     }
 
     return (

@@ -2,9 +2,9 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-function Header() {
-    const { totalPrice, items } = useSelector(state => state.cart);
-    const totalQty = items.reduce((sum, obj) => {
+const Header: React.FC = () => {
+    const { totalPrice, items } = useSelector((state: any) => state.cart);
+    const totalQty = items.reduce((sum: number, obj: any) => {
         return obj.count + sum;
     }, 0);
 

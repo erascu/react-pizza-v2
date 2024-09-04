@@ -12,21 +12,28 @@ import { setCategoryId, setFilters } from '../redux/slices/filterSlice';
 import { fetchPizzas } from '../redux/slices/pizzasSlice';
 import { useNavigate } from 'react-router-dom';
 
-function Home() {
+const Home: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const { items, status } = useSelector(state => state.pizzas);
+    const { items, status } = useSelector((state: any) => state.pizzas);
     const pizzas = items;
 
-    const categoryId = useSelector(state => state.filter.categoryId);
-    const sortId = useSelector(state => state.filter.sortId);
+    const categoryId = useSelector((state: any) => state.filter.categoryId);
+    const sortId = useSelector((state: any) => state.filter.sortId);
 
     const [searchValue, setSearchValue] = React.useState('');
 
     React.useEffect(() => {
         const fetchData = async () => {
-            dispatch(fetchPizzas({ categoryId, sortId, searchValue }));
+            dispatch(
+                // @ts-ignore
+                fetchPizzas({
+                    categoryId,
+                    sortId,
+                    searchValue,
+                }),
+            );
         }
 
         fetchData();
@@ -51,12 +58,12 @@ function Home() {
         <>
             <div className="container">
                 <div className="content__top">
-                    <Categories value={categoryId} onClickCat={(i) => dispatch(setCategoryId(i))} />
+                    <Categories value={categoryId} onClickCat={(i: any) => dispatch(setCategoryId(i))} />
                     <Sort />
                 </div>
                 <div className="content__block">
                     <h2 className="content__title">Pizzas</h2>
-                    <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+                    <Search setSearchValue={setSearchValue} />
                 </div>
                 {status === 'error' &&
                     <div className="content__error">
@@ -66,7 +73,7 @@ function Home() {
                         <p>If the problem persists, please check your internet connection or contact support for further assistance.</p>
                     </div>}
                 <div className="content__items">
-                    {status === 'loading' ? [...new Array(4)].map((_, i) => <Skeleton key={i} />) : pizzas.map(pizza => <PizzaBlock key={pizza.id} {...pizza} />)}
+                    {status === 'loading' ? [...new Array(4)].map((_, i) => <Skeleton key={i} />) : pizzas.map((pizza: any) => <PizzaBlock key={pizza.id} {...pizza} />)}
                 </div>
             </div>
         </>
