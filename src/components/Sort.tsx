@@ -1,12 +1,12 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { setSortId } from '../redux/slices/filterSlice';
+import { useAppDispatch } from '../redux/store';
 
 export const sortNames = ['-rating', 'price', '-price', 'title'];
 const sortItems = ['popularity', 'price low to high', 'price high to low', 'alphabet'];
 
 const Sort: React.FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const sortRef = React.useRef<HTMLDivElement>(null);
 
     // const sortItems = ['popularity', 'price low to high', 'price high to low', 'alphabet'];
@@ -15,7 +15,7 @@ const Sort: React.FC = () => {
     const [open, setOpen] = React.useState(false);
     const [sortActive, setSortActive] = React.useState(0);
 
-    function sortChoosen(chosenItem: any) {
+    function sortChoosen(chosenItem: number) {
         setSortActive(chosenItem);
         dispatch(setSortId(sortNames[chosenItem]));
         setOpen(false);

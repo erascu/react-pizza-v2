@@ -4,15 +4,16 @@ import styles from './Search.module.scss';
 
 type SearchProps = {
     setSearchValue: any;
+    // setSearchValue: (e: number | string) => void;
 }
 
 const Search: React.FC<SearchProps> = ({ setSearchValue }) => {
     const [value, setValue] = React.useState('');
     const inputRef = React.useRef<HTMLInputElement>(null);
 
-    const updatedSearchValue = React.useCallback(debounce(e => setSearchValue(e), 350), []);
+    const updatedSearchValue = React.useCallback(debounce((e) => setSearchValue(e), 350), []);
 
-    function onChangeSearch(e: any) {
+    function onChangeSearch(e: React.ChangeEvent<HTMLInputElement>) {
         setValue(e.target.value);
         updatedSearchValue(e.target.value);
     }

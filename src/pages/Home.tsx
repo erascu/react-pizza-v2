@@ -7,32 +7,27 @@ import Categories from '../components/Categories';
 import Sort, { sortNames } from '../components/Sort';
 import Search from '../components/Search/Search';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { setCategoryId, setFilters } from '../redux/slices/filterSlice';
-import { fetchPizzas } from '../redux/slices/pizzasSlice';
+import { fetchPizzas, Pizza } from '../redux/slices/pizzasSlice';
 import { useNavigate } from 'react-router-dom';
+import { RootState, useAppDispatch } from '../redux/store';
 
 const Home: React.FC = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const { items, status } = useSelector((state: any) => state.pizzas);
+    const { items, status } = useSelector((state: RootState) => state.pizzas);
     const pizzas = items;
 
-    const categoryId = useSelector((state: any) => state.filter.categoryId);
-    const sortId = useSelector((state: any) => state.filter.sortId);
+    const categoryId = useSelector((state: RootState) => state.filter.categoryId);
+    const sortId = useSelector((state: RootState) => state.filter.sortId);
 
     const [searchValue, setSearchValue] = React.useState('');
 
     React.useEffect(() => {
         const fetchData = async () => {
-            dispatch(
-                // @ts-ignore
-                fetchPizzas({
-                    categoryId,
-                    sortId,
-                    searchValue,
-                }),
+            dispatch(fetchPizzas({ categoryId, sortId, searchValue }),
             );
         }
 
@@ -42,14 +37,19 @@ const Home: React.FC = () => {
     }, [categoryId, sortId, searchValue]);
 
     React.useEffect(() => {
-        const queryString = qs.stringify({
-            categoryId,
-            sortId,
-        });
+        if (categoryId === 0 && sortId === '-rating') {
+            navigate('/');
+        } else {
+            const queryString = qs.stringify({
+                categoryId,
+                sortId,
+            });
 
-        // const params = qs.parse(window.location.search.substring(1));
+            // const params = qs.parse(window.location.search.substring(1));
 
-        navigate(`?${queryString}`);
+            navigate(`?${queryString}`);
+        }
+
     }, [categoryId, sortId]); //using "navigate hook and qs" we can show the link in the adress line
 
     // const pageQty = Math.round(Number(pizzas.length) / 4);
@@ -58,7 +58,7 @@ const Home: React.FC = () => {
         <>
             <div className="container">
                 <div className="content__top">
-                    <Categories value={categoryId} onClickCat={(i: any) => dispatch(setCategoryId(i))} />
+                    <Categories value={categoryId} onClickCat={i => dispatch(setCategoryId(i))} />
                     <Sort />
                 </div>
                 <div className="content__block">
@@ -73,7 +73,7 @@ const Home: React.FC = () => {
                         <p>If the problem persists, please check your internet connection or contact support for further assistance.</p>
                     </div>}
                 <div className="content__items">
-                    {status === 'loading' ? [...new Array(4)].map((_, i) => <Skeleton key={i} />) : pizzas.map((pizza: any) => <PizzaBlock key={pizza.id} {...pizza} />)}
+                    {status === 'loading' ? [...new Array(4)].map((_, i) => <Skeleton key={i} />) : pizzas.map((pizza: Pizza) => <PizzaBlock key={pizza.id} {...pizza} />)}
                 </div>
             </div>
         </>

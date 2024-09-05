@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 const Header: React.FC = () => {
-    const { totalPrice, items } = useSelector((state: any) => state.cart);
-    const totalQty = items.reduce((sum: number, obj: any) => {
+    const { totalPrice, items } = useSelector((state: RootState) => state.cart);
+    const totalQty = items.reduce((sum: number, obj) => {
         return obj.count + sum;
     }, 0);
 

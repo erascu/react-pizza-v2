@@ -1,6 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
+interface FilterSliceState {
+    categoryId: number;
+    sortId: string;
+}
+
+const initialState: FilterSliceState = {
     categoryId: 0,
     sortId: '-rating',
 }
@@ -9,13 +14,13 @@ export const filterSlice = createSlice({
     name: 'filter',
     initialState,
     reducers: {
-        setCategoryId(state, action) {
+        setCategoryId(state, action: PayloadAction<number>) {
             state.categoryId = action.payload;
         },
-        setSortId(state, action) {
+        setSortId(state, action: PayloadAction<string>) {
             state.sortId = action.payload;
         },
-        setFilters(state, action) {
+        setFilters(state, action: PayloadAction<FilterSliceState>) {
             state.categoryId = Number(action.payload.categoryId);
             state.sortId = action.payload.sortId;
         }
