@@ -11,6 +11,16 @@ const Header: React.FC = () => {
 
     const location = useLocation();
 
+    const isMounted = React.useRef(false);
+
+    React.useEffect(() => {
+        if (isMounted.current) {
+            const json = JSON.stringify(items);
+            localStorage.setItem('cart', json);
+        }
+        isMounted.current = true;
+    }, [items]);
+
     return (
         <div className="header">
             <div className="container">

@@ -3,8 +3,7 @@ import debounce from 'lodash.debounce';
 import styles from './Search.module.scss';
 
 type SearchProps = {
-    setSearchValue: any;
-    // setSearchValue: (e: number | string) => void;
+    setSearchValue: (e: string) => void;
 }
 
 const Search: React.FC<SearchProps> = ({ setSearchValue }) => {

@@ -24,24 +24,6 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, title, price, imageUrl, siz
     const [sizeActive, setSizeActive] = React.useState(0);
     const [doughActive, setDoughActive] = React.useState(0);
 
-    // const doughPrice = () => {
-    //     if (doughActive < 1) {
-    //         return price;
-    //     } else if (doughActive === 1) {
-    //         return price += 15;
-    //     }
-    // }
-
-    // const sizePrice = () => {
-    //     if (sizeActive < 1) {
-    //         return 0;
-    //     } else if (sizeActive === 1) {
-    //         return 20;
-    //     } else if (sizeActive === 2) {
-    //         return 40;
-    //     }
-    // }
-
     const onClickAdd = () => {
         const item: CartItem = {
             id,

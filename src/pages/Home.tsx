@@ -23,7 +23,7 @@ const Home: React.FC = () => {
     const categoryId = useSelector((state: RootState) => state.filter.categoryId);
     const sortId = useSelector((state: RootState) => state.filter.sortId);
 
-    const [searchValue, setSearchValue] = React.useState('');
+    const [searchValue, setSearchValue] = React.useState<string>('');
 
     React.useEffect(() => {
         const fetchData = async () => {
@@ -54,11 +54,13 @@ const Home: React.FC = () => {
 
     // const pageQty = Math.round(Number(pizzas.length) / 4);
 
+    const onChangeCat = (i: number) => dispatch(setCategoryId(i));
+
     return (
         <>
             <div className="container">
                 <div className="content__top">
-                    <Categories value={categoryId} onClickCat={i => dispatch(setCategoryId(i))} />
+                    <Categories value={categoryId} onClickCat={onChangeCat} />
                     <Sort />
                 </div>
                 <div className="content__block">

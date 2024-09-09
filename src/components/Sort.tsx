@@ -23,6 +23,7 @@ const Sort: React.FC = () => {
 
     React.useEffect(() => {
         const handleClickOutside = (e: any) => {
+            console.log(e.composedPath().includes(sortRef.current));
             if (!e.composedPath().includes(sortRef.current)) {
                 setOpen(false);
             }
