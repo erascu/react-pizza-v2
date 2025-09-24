@@ -20,7 +20,8 @@ body {
   margin: 50px auto;
 
   @media (max-width: 400px) {
-    width: 100%;
+    min-width: 315px;
+    margin: 30px auto;
   }
 }
 
@@ -34,6 +35,7 @@ body {
 
     @media (max-width: 768px) {
       flex-direction: column;
+      margin-bottom: 20px;
     }
   }
 

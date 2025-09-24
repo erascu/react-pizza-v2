@@ -1,4 +1,4 @@
-@import '../variables';
+@import "../variables";
 
 .categories {
   ul {
@@ -31,15 +31,7 @@
   }
 
   @media (max-width: 876px) {
-    max-width: 400px;
+    max-width: 100%;
     overflow-x: auto;
-  }
-
-  @media (max-width: 580px) {
-    max-width: 300px;
-  }
-
-  @media (max-width: 436px) {
-    max-width: 200px;
   }
 }
